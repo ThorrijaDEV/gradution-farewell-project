@@ -507,6 +507,7 @@ body.hovering #cursor-inner {
 /* Start Button */
 .btn-start {
     position: relative;
+    z-index: 10; /
     display: inline-flex;
     align-items: center;
     justify-content: center;
