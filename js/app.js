@@ -143,7 +143,10 @@ let isTransitioning = false;
 const els = {
     introScreen: document.getElementById('intro-screen'),
     mainScreen: document.getElementById('main-screen'),
-    startBtn: document.getElementById('start-btn'),
+    
+    // Cambiado de getElementById a querySelector para que encuentre tu clase .btn-start
+    startBtn: document.querySelector('.btn-start'), 
+    
     cardsGrid: document.getElementById('cards-grid'),
     cardsProgress: document.getElementById('cards-progress'),
     progressFill: document.getElementById('progress-fill'),
