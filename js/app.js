@@ -570,14 +570,27 @@ function updateProgress() {
         }, 1000);
     }
 }
+// ============================================
+// RETRO 8-BIT MUSIC (Web Audio API) - CORREGIDO
+// ============================================
 
-// ============================================
-// AMBIENT MUSIC (Web Audio API)
-// ============================================
+// El listado de notas que formará la melodía real en lugar de un zumbido fijo
+const melody = [
+    { note: 261.63, dur: 0.4 }, { note: 329.63, dur: 0.4 }, { note: 392.00, dur: 0.4 }, { note: 523.25, dur: 0.6 },
+    { note: 440.00, dur: 0.4 }, { note: 523.25, dur: 0.4 }, { note: 392.00, dur: 0.8 },
+    { note: 349.23, dur: 0.4 }, { note: 440.00, dur: 0.4 }, { note: 523.25, dur: 0.4 }, { note: 493.88, dur: 0.6 },
+    { note: 392.00, dur: 0.4 }, { note: 440.00, dur: 0.4 }, { note: 293.66, dur: 0.8 }
+];
+
+let audioLoopInterval = null; // Guardará el temporizador del bucle
+
 function toggleMusic() {
     isMuted = !isMuted;
-    els.muteBtn.classList.toggle('muted', isMuted);
-    els.muteBtn.querySelector('.icon').textContent = isMuted ? '🔇' : '🎵';
+    if (els.muteBtn) {
+        els.muteBtn.classList.toggle('muted', isMuted);
+        const icon = els.muteBtn.querySelector('.icon');
+        if (icon) icon.textContent = isMuted ? '🔇' : '🎵';
+    }
 
     if (!isMuted) {
         startAmbientMusic();
@@ -591,65 +604,53 @@ function startAmbientMusic() {
         audioContext = new (window.AudioContext || window.webkitAudioContext)();
     }
 
-    // Resume if suspended (browser policy)
     if (audioContext.state === 'suspended') {
         audioContext.resume();
     }
 
-    stopAmbientMusic();
+    stopAmbientMusic(); // Nos aseguramos de apagar todo lo anterior
 
-    // Create a more pleasing ambient drone using multiple oscillators
-    const gainNode = audioContext.createGain();
-    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-    gainNode.gain.linearRampToValueAtTime(0.03, audioContext.currentTime + 2);
+    let currentNoteIndex = 0;
 
-    // Base drone
-    const osc1 = audioContext.createOscillator();
-    osc1.type = 'sine';
-    osc1.frequency.setValueAtTime(220, audioContext.currentTime);
-    osc1.connect(gainNode);
+    function playNextNote() {
+        if (isMuted) return;
 
-    // Harmonic overtone
-    const osc2 = audioContext.createOscillator();
-    osc2.type = 'triangle';
-    osc2.frequency.setValueAtTime(329.63, audioContext.currentTime);
-    osc2.connect(gainNode);
+        const item = melody[currentNoteIndex];
+        
+        // Creamos un oscilador único que cambiará y se destruirá en cada nota
+        const osc = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        osc.type = 'square'; // Onda cuadrada para el sonido puro nintendo/retro
+        osc.frequency.setValueAtTime(item.note, audioContext.currentTime);
+        
+        // Configuración de volumen muy suave (2%) para que no sature
+        gainNode.gain.setValueAtTime(0.02, audioContext.currentTime);
+        // Fade-out sutil al final de la nota para que no haga "clics" de audio ruidosos
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + item.dur - 0.05);
 
-    // Third harmonic
-    const osc3 = audioContext.createOscillator();
-    osc3.type = 'sine';
-    osc3.frequency.setValueAtTime(440, audioContext.currentTime);
-    const gain3 = audioContext.createGain();
-    gain3.gain.setValueAtTime(0.01, audioContext.currentTime);
-    osc3.connect(gain3);
-    gain3.connect(gainNode);
+        osc.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        osc.start();
+        osc.stop(audioContext.currentTime + item.dur); // ¡Obligatorio! Aquí se apaga la nota
 
-    gainNode.connect(audioContext.destination);
+        // Avanzar a la siguiente nota de la melodía de manera infinita
+        currentNoteIndex = (currentNoteIndex + 1) % melody.length;
+        
+        // Programamos el inicio de la siguiente nota justo cuando termina esta
+        audioLoopInterval = setTimeout(playNextNote, item.dur * 1000);
+    }
 
-    osc1.start();
-    osc2.start();
-    osc3.start();
-
-    // Gentle fade in
-    currentOscillator = osc1;
-    currentGain = gainNode;
+    playNextNote();
 }
 
 function stopAmbientMusic() {
-    if (currentGain && audioContext) {
-        currentGain.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.5);
-        setTimeout(() => {
-            if (currentOscillator) {
-                try {
-                    currentOscillator.stop();
-                } catch (e) {
-                    // Already stopped
-                }
-            }
-        }, 500);
+    // Si hay notas programadas en cola, las cancelamos por completo
+    if (audioLoopInterval) {
+        clearTimeout(audioLoopInterval);
+        audioLoopInterval = null;
     }
-}
-
 // ============================================
 // CONFETTI
 // ============================================
