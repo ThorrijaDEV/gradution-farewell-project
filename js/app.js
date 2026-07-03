@@ -63,7 +63,7 @@ const teachers = [
 
 <p>El próximo año seré mejor estudiante, lo prometo. O al menos intentaré no meter tanto la pata... aunque no puedo prometer nada.</p>
 
-<p class="signature">Gracias por formar parte de una etapa que nunca voy a olvidar.</p>`
+<p class="signature">Gracias por formar parte de una etapa que nunca voy a olvidar, espero vernos en un futuro (capaz me veras por las noticias con alguna cosa hecha por mi o siendo detenido).</p>`
     },
     {
         id: 'concha',
