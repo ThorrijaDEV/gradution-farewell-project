@@ -39,7 +39,7 @@ const teachers = [
 
 <p>Y nunca lo olvidaré.</p>
 
-<p>Estoy seguro de que esto no es un adiós. Algún día volveremos a cruzarnos. Quizá por los pasillos del instituto, cuando ya no esté ni siquiera estudiando ahí. Quizá por la calle, en algún lugar random, y nos pararemos a hablar como si no hubiera pasado el tiempo. Quizá dentro de unos años cuando ya ni siquiera nos esperemos, y me resultará imposible no sonreír alrecordar las clases de Biología.</p>
+<p>Estoy seguro de que esto no es un adiós. Algún día volveremos a cruzarnos. Quizá por los pasillos del instituto, cuando ya no esté ni siquiera estudiando ahí. Quizá por la calle, en algún lugar random, y nos pararemos a hablar como si no hubiera pasado el tiempo. Quizá dentro de unos años cuando ya ni siquiera nos esperemos, y me resultará imposible no sonreír alrecordar las clases de Biología (o me veras por las noticias con alguna cosa hecha por mi o siendo detenido).</p>
 
 <p class="signature">Gracias por formar parte de una etapa que nunca voy a olvidar.</p>`
     },
@@ -57,7 +57,7 @@ const teachers = [
 
 <p>Y yo me quedé con la sensación de haber tirado algo al suelo sin querer. Porque tú no eres de los que gritan por gusto. Y si llegaste a ese punto, es porque nos lo habíamos ganado a pulso. Ese día aprendí algo que ninguna fórmula matemática me habría enseñado nunca. Que el respeto no se gana haciendo el tonto. Que hay un límite, y que cruzarlo tiene consecuencias reales. Y que cuando alguien como tú, que siempre bromea y siempre pasa del tema de las tonterías, se pone serio... es porque de verdad le importa. Eso me hizo querer cambiar. No solo por las notas ni por el miedo a reprobar. Sino porque no quería defraudarte. Porque al final, tú eras el que más cae bien, y no quería que pensaras que éramos unos inútiles sin remedio.</p>
 
-<p>Pero la conversación que más me marcó fue la del final de curso. Me pediste que habláramos un minuto después de clase, cuando todo el mundo se había ido. Y no me gritaste. Me hablaste. Me preguntaste qué pasaba, por qué habíamos cambiado después de aquel día, qué me movía. Y me escuchaste. Sin terceras personas, sin sermones largos de esos que dan los padres cuando cogen en falta las llaves. Solo una conversación entre dos personas. Y casi me haces llorar. Lo digo en serio, estuve a punto de llorar frente a ti como una persona normal. Sentí que te importaba lo que me pasaba, no solo lo que sacaba en un examen o si había aprobado la última prueba de funciones. Eso es lo más valioso que me has dado este año.</p>
+<p>Pero la conversación que más me marcó fue la del final de curso. Solo una conversación entre dos personas. Y casi me haces llorar. Lo digo en serio, estuve a punto de llorar frente a ti como una persona normal. Sentí que te el tiempo pasa muy rápido, y no todo es solo lo que sacaba en un examen o si había aprobado. Eso es lo más valioso que me has dado este año.</p>
 
 <p>Gracias por enseñarme que no todo en la vida es una broma. Que a veces hay que ponerse serio. Que el respeto se gana y se mantiene, y que hay que trabajar por él. Y gracias por, aun así, mantener ese sentido del humor que hacía que incluso los lunes a primera hora de Matemáticas fueran soportables, incluso agradable. Porque no hay muchos profesores que sepan hacer las dos cosas a la vez sin caer en el cliché del profe gruñón o del profe amigo.</p>
 
